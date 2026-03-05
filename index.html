@@ -77,24 +77,6 @@
     button:active {
       transform: translateY(-2px);
     }
-
-    #url {
-      font-size: 0.95rem;
-      color: rgba(255, 255, 255, 0.8);
-      word-break: break-all;
-      max-width: 400px;
-    }
-
-    #url a {
-      color: rgba(255, 255, 255, 0.95);
-      text-decoration: none;
-      border-bottom: 2px solid rgba(255, 255, 255, 0.5);
-      transition: border-color 0.3s ease;
-    }
-
-    #url a:hover {
-      border-bottom-color: white;
-    }
   </style>
 </head>
 <body>
@@ -105,8 +87,8 @@
       <button onclick="window.location.href=document.getElementById('tlink').href">
         Open NAS
       </button>
-      <p id="url"><a id="tlink" href="#">Loading...</a></p>
     </div>
+    <a id="tlink" href="#" style="display: none;"></a>
   </div>
 
   <script>
