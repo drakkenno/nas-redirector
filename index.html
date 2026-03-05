@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>NAS Redirect</title>
+</head>
+<body>
+  <h1>NAS Redirector</h1>
+  <p>Click to open NAS:</p>
+  <p id="url"><a id="tlink" href="#">(no tunnel yet)</a></p>
+  <button onclick="window.location.href=document.getElementById('tlink').href">Open NAS</button>
+  <script>
+    // This will be updated by the updater script
+    const NAS_URL = "https://eval-ballot-differ-spend.trycloudflare.com";
+    document.getElementById('tlink').href = NAS_URL;
+    document.getElementById('tlink').textContent = NAS_URL;
+  </script>
+</body>
+</html>
