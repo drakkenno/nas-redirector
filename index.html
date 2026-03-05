@@ -84,18 +84,23 @@
     <h1>NAS Server</h1>
     <p class="subtitle">Access your files anywhere</p>
     <div class="button-wrapper">
-      <button onclick="window.location.href=document.getElementById('tlink').href">
+      <button onclick="openNAS()">
         Open NAS
       </button>
     </div>
-    <a id="tlink" href="#" style="display: none;"></a>
   </div>
 
   <script>
     // This will be updated by the updater script
     const NAS_URL = "https://specifies-betting-rocket-coming.trycloudflare.com";
-    document.getElementById('tlink').href = NAS_URL;
-    document.getElementById('tlink').textContent = NAS_URL;
+    
+    function openNAS() {
+      if (NAS_URL && NAS_URL !== "#") {
+        window.location.href = NAS_URL;
+      } else {
+        alert("Tunnel URL not yet available. Please wait and refresh.");
+      }
+    }
   </script>
 </body>
 </html>
