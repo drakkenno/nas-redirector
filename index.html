@@ -3,13 +3,112 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>NAS Redirect</title>
+  <title>NAS Redirector</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 3.5rem;
+      color: white;
+      font-weight: 700;
+      letter-spacing: -1px;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      font-size: 1.2rem;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 20px;
+    }
+
+    .button-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+
+    button {
+      padding: 24px 60px;
+      font-size: 1.3rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 12px;
+      background: white;
+      color: #667eea;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    button:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+      background: #f8f9fa;
+    }
+
+    button:active {
+      transform: translateY(-2px);
+    }
+
+    #url {
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.8);
+      word-break: break-all;
+      max-width: 400px;
+    }
+
+    #url a {
+      color: rgba(255, 255, 255, 0.95);
+      text-decoration: none;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+      transition: border-color 0.3s ease;
+    }
+
+    #url a:hover {
+      border-bottom-color: white;
+    }
+  </style>
 </head>
 <body>
-  <h1>NAS Redirector</h1>
-  <p>Click to open NAS:</p>
-  <p id="url"><a id="tlink" href="#">(no tunnel yet)</a></p>
-  <button onclick="window.location.href=document.getElementById('tlink').href">Open NAS</button>
+  <div class="container">
+    <h1>NAS Server</h1>
+    <p class="subtitle">Access your files anywhere</p>
+    <div class="button-wrapper">
+      <button onclick="window.location.href=document.getElementById('tlink').href">
+        Open NAS
+      </button>
+      <p id="url"><a id="tlink" href="#">Loading...</a></p>
+    </div>
+  </div>
+
   <script>
     // This will be updated by the updater script
     const NAS_URL = "https://surrey-spyware-duo-pale.trycloudflare.com";
