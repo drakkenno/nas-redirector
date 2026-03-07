@@ -77,9 +77,41 @@
     button:active {
       transform: translateY(-2px);
     }
+
+    .guide-button {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      padding: 10px 20px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border: 2px solid white;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+    }
+
+    .guide-button:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .guide-button:active {
+      transform: translateY(0px);
+    }
   </style>
 </head>
 <body>
+  <button class="guide-button" onclick="openGuide()">📖 Guía de Usuario</button>
+  
   <div class="container">
     <h1>NAS Server</h1>
     <p class="subtitle">Access your files anywhere</p>
@@ -100,6 +132,10 @@
       } else {
         alert("Tunnel URL not yet available. Please wait and refresh.");
       }
+    }
+
+    function openGuide() {
+      window.open("./GUIA_USUARIO.html", "_blank");
     }
   </script>
 </body>

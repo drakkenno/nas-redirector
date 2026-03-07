@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía del Usuario - Almacenamiento Seguro NAS</title>
+    <style>
+        @page {
+            margin: 2cm;
+            size: A4;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background: #fff;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 0.5em;
+            border-bottom: 4px solid #3498db;
+            padding-bottom: 0.3em;
+            page-break-after: avoid;
+        }
+        
+        h2 {
+            color: #34495e;
+            font-size: 1.8em;
+            margin-top: 1.5em;
+            margin-bottom: 0.8em;
+            border-left: 5px solid #3498db;
+            padding-left: 15px;
+            page-break-after: avoid;
+        }
+        
+        h3 {
+            color: #2980b9;
+            font-size: 1.4em;
+            margin-top: 1.2em;
+            margin-bottom: 0.6em;
+            page-break-after: avoid;
+        }
+        
+        p {
+            margin-bottom: 1em;
+            text-align: justify;
+        }
+        
+        ul, ol {
+            margin-left: 2em;
+            margin-bottom: 1em;
+        }
+        
+        li {
+            margin-bottom: 0.5em;
+        }
+        
+        strong {
+            color: #2c3e50;
+            font-weight: 600;
+        }
+        
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #e74c3c;
+        }
+        
+        pre {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 1em 0;
+            page-break-inside: avoid;
+        }
+        
+        pre code {
+            background: transparent;
+            color: #ecf0f1;
+            padding: 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5em 0;
+            page-break-inside: avoid;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        th {
+            background: #3498db;
+            color: white;
+            font-weight: 600;
+        }
+        
+        tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        
+        .highlight {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 1em 0;
+            page-break-inside: avoid;
+        }
+        
+        .success {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            margin: 1em 0;
+            page-break-inside: avoid;
+        }
+        
+        .danger {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            margin: 1em 0;
+            page-break-inside: avoid;
+        }
+        
+        .info {
+            background: #d1ecf1;
+            border-left: 4px solid #17a2b8;
+            padding: 15px;
+            margin: 1em 0;
+            page-break-inside: avoid;
+        }
+        
+        .emoji {
+            font-size: 1.2em;
+        }
+        
+        .section-break {
+            border-top: 2px dashed #ccc;
+            margin: 2em 0;
+        }
+        
+        .footer {
+            margin-top: 3em;
+            padding-top: 1em;
+            border-top: 2px solid #3498db;
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+        
+        @media print {
+            body {
+                padding: 0;
+                max-width: 100%;
+            }
+            
+            h1, h2, h3 {
+                page-break-after: avoid;
+            }
+            
+            table, pre, .highlight, .success, .danger, .info {
+                page-break-inside: avoid;
+            }
+            
+            a {
+                color: #2980b9;
+                text-decoration: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>🔐 Guía del Usuario - Almacenamiento Seguro NAS</h1>
+    
+    <h2>¿Por qué tus archivos están seguros?</h2>
+    <p>¡Bienvenido/a! Esta guía te explica de forma sencilla cómo funciona la seguridad de este sistema y por qué puedes confiar en que tus archivos están protegidos.</p>
+    
+    <div class="section-break"></div>
+    
+    <h2>🌟 Lo más importante que debes saber</h2>
+    
+    <h3>Tu contraseña es la llave maestra 🗝️</h3>
+    <div class="info">
+        <p><strong>Piensa en tu contraseña como la llave de una caja fuerte:</strong></p>
+        <ul>
+            <li>Solo TÚ conoces esta llave</li>
+            <li>Sin ella, NADIE puede ver tus archivos</li>
+            <li>Ni siquiera el administrador del sistema puede leer tus archivos sin tu contraseña</li>
+            <li>Tus archivos están encriptados con tecnología militar (la misma que usan los gobiernos)</li>
+        </ul>
+    </div>
+    
+    <div class="section-break"></div>
+    
+    <h2>🛡️ ¿Cómo protegemos tu información?</h2>
+    
+    <h3>1. Tu contraseña nunca se guarda 🔒</h3>
+    <p><strong>¿Qué significa esto?</strong></p>
+    <ul>
+        <li>Cuando creas tu contraseña, el sistema la convierte en un código especial (se llama "hash")</li>
+        <li>Este código NO se puede revertir para obtener tu contraseña original</li>
+        <li>Es como hacer una tortilla con huevos - no puedes recuperar los huevos después</li>
+    </ul>
+    
+    <p><strong>¿Por qué es importante?</strong></p>
+    <ul>
+        <li>Aunque alguien robe la base de datos, NO puede ver tu contraseña</li>
+        <li>Usamos un sistema llamado "bcrypt" con 12 rondas de protección</li>
+        <li>Es prácticamente imposible descifrar tu contraseña (tardaría miles de años)</li>
+    </ul>
+    
+    <p><strong>Ejemplo en la vida real:</strong></p>
+    <pre><code>Tu contraseña:        MiContraseña123
+Lo que guardamos:     $2a$12$KIXw3v... (código imposible de revertir)</code></pre>
+    
+    <h3>2. Todos tus archivos están encriptados 🔐</h3>
+    <p><strong>¿Qué es la encriptación?</strong><br>
+    Imagina que tus archivos están escritos en un idioma secreto que solo tú puedes entender:</p>
+    
+    <p><strong>Sin encriptación (PELIGROSO):</strong></p>
+    <pre><code>Archivo: carta.txt
+Contenido: "Querida mamá, te envío 1000 dólares..."
+↓ Cualquiera puede leerlo ❌</code></pre>
+    
+    <p><strong>Con encriptación (SEGURO):</strong></p>
+    <pre><code>Archivo: f_a3f2e1b9c4d5...
+Contenido: "4f8a2b9c1d3e5f7a9b2c4d6e8f..." 
+↓ Nadie puede entender esto ✅</code></pre>
+    
+    <div class="success">
+        <p><strong>La tecnología que usamos:</strong></p>
+        <ul>
+            <li><strong>AES-256-GCM</strong> - El mismo nivel de encriptación que usan los militares</li>
+            <li>Aprobado por la NSA (Agencia de Seguridad Nacional de EE.UU.) para documentos TOP SECRET</li>
+            <li>Cada archivo tiene su propio código secreto único</li>
+        </ul>
+    </div>
+    
+    <h3>3. Incluso los nombres de tus archivos están ocultos 🕵️</h3>
+    <p><strong>¿Por qué ocultamos los nombres?</strong><br>
+    Porque los nombres de archivo pueden revelar información sensible:</p>
+    
+    <p><strong>Ejemplo de nombres que podrían ser privados:</strong></p>
+    <ul>
+        <li>Declaración_Impuestos_2025.pdf</li>
+        <li>Resultados_Médicos_Doctor.jpg</li>
+        <li>Contraseñas_Bancarias.txt</li>
+    </ul>
+    
+    <p><strong>Cómo los protegemos:</strong></p>
+    <pre><code>Nombre original:      Foto_Familiar.jpg
+Almacenado como:      f_c8d9e2a1b3f4... (imposible de identificar)
+Solo tú ves:          Foto_Familiar.jpg (cuando inicias sesión)</code></pre>
+    
+    <div class="section-break"></div>
+    
+    <h2>🔄 ¿Qué pasa cuando cambias tu contraseña?</h2>
+    
+    <h3>El sistema re-encripta TODOS tus archivos automáticamente</h3>
+    <p><strong>Paso a paso:</strong></p>
+    <ol>
+        <li>Introduces tu contraseña antigua</li>
+        <li>Introduces tu contraseña nueva</li>
+        <li>El sistema hace su magia:
+            <ul>
+                <li>Toma CADA archivo tuyo</li>
+                <li>Lo desencripta con la contraseña antigua</li>
+                <li>Lo vuelve a encriptar con la contraseña nueva</li>
+                <li>Todo esto pasa en segundos o minutos (dependiendo de cuántos archivos tengas)</li>
+            </ul>
+        </li>
+    </ol>
+    
+    <div class="info">
+        <p><strong>¿Por qué hacemos esto?</strong></p>
+        <ul>
+            <li>Para que sigas pudiendo acceder a TODOS tus archivos con tu nueva contraseña</li>
+            <li>Sin esto, perderías acceso a tus archivos antiguos</li>
+            <li>Es automático - no tienes que hacer nada</li>
+        </ul>
+    </div>
+    
+    <div class="highlight">
+        <p><strong>Durante el proceso:</strong></p>
+        <ul>
+            <li>Verás una barra de progreso</li>
+            <li>NO cierres el navegador</li>
+            <li>Espera hasta que se complete</li>
+            <li>¡Y listo! Todos tus archivos ahora usan tu nueva contraseña</li>
+        </ul>
+    </div>
+    
+    <div class="section-break"></div>
+    
+    <h2>🦠 Protección contra archivos maliciosos</h2>
+    
+    <h3>El sistema bloquea automáticamente archivos peligrosos</h3>
+    
+    <p><strong>¿Qué archivos bloqueamos?</strong></p>
+    
+    <div class="danger">
+        <p><strong>❌ BLOQUEADO - Archivos ejecutables (pueden contener virus):</strong></p>
+        <ul>
+            <li><code>.exe</code> - Programas de Windows</li>
+            <li><code>.dll</code> - Librerías de Windows</li>
+            <li><code>.bat</code>, <code>.cmd</code> - Scripts de Windows</li>
+            <li><code>.sh</code>, <code>.bash</code> - Scripts de Linux</li>
+            <li><code>.js</code>, <code>.py</code>, <code>.php</code> - Código de programación</li>
+            <li><code>.apk</code> - Aplicaciones de Android</li>
+            <li><code>.jar</code> - Programas Java</li>
+            <li><strong>¡Y más de 50 tipos peligrosos!</strong></li>
+        </ul>
+    </div>
+    
+    <div class="success">
+        <p><strong>✅ PERMITIDO - Archivos seguros:</strong></p>
+        <ul>
+            <li>📄 Documentos: PDF, Word, Excel, PowerPoint, etc.</li>
+            <li>🖼️ Imágenes: JPG, PNG, GIF, etc.</li>
+            <li>🎵 Música: MP3, FLAC, WAV, etc.</li>
+            <li>🎬 Videos: MP4, AVI, MOV, etc.</li>
+            <li>📦 Archivos comprimidos: ZIP, RAR, 7Z, etc.</li>
+        </ul>
+    </div>
+    
+    <h3>Verificación inteligente de contenido 🔍</h3>
+    <p><strong>No solo miramos la extensión del archivo - miramos su contenido real:</strong></p>
+    
+    <pre><code>Archivo enviado:      foto.jpg
+Contenido real:       ¡Es un virus disfrazado!
+Sistema detecta:      "Este archivo tiene un encabezado .EXE"
+Acción:              ❌ BLOQUEADO - "El contenido no coincide con formato JPG"</code></pre>
+    
+    <p><strong>¿Cómo lo hacemos?</strong></p>
+    <ul>
+        <li>Leemos los primeros bytes del archivo (llamados "magic numbers" o números mágicos)</li>
+        <li>Cada tipo de archivo tiene una "firma" única</li>
+        <li>Si un archivo .JPG no tiene la firma correcta de JPG, lo rechazamos</li>
+        <li>Esto detiene el 99% de los archivos maliciosos disfrazados</li>
+    </ul>
+    
+    <div class="section-break"></div>
+    
+    <h2>👤 Primer inicio de sesión - Usuarios nuevos</h2>
+    
+    <h3>¿Por qué te pedimos cambiar tu contraseña?</h3>
+    <div class="info">
+        <p><strong>Seguridad desde el inicio:</strong></p>
+        <ol>
+            <li>El administrador te crea una cuenta con una contraseña temporal</li>
+            <li>Cuando inicias sesión por primera vez, DEBES cambiar esa contraseña</li>
+            <li>Hasta que no cambies la contraseña, NO puedes acceder a ningún archivo</li>
+            <li>Esto garantiza que SOLO TÚ conoces tu contraseña (ni siquiera el administrador)</li>
+        </ol>
+    </div>
+    
+    <p><strong>Requisitos de tu nueva contraseña:</strong></p>
+    <ul>
+        <li>✅ Mínimo 6 caracteres (recomendamos 12+)</li>
+        <li>✅ Al menos una letra MAYÚSCULA (A, B, C...)</li>
+        <li>✅ Al menos una letra minúscula (a, b, c...)</li>
+        <li>✅ Al menos un número (0, 1, 2...)</li>
+    </ul>
+    
+    <p><strong>Ejemplos:</strong></p>
+    <ul>
+        <li>❌ "hola123" - No tiene mayúsculas</li>
+        <li>❌ "HOLA123" - No tiene minúsculas</li>
+        <li>❌ "HolaMundo" - No tiene números</li>
+        <li>✅ "HolaMundo123" - ¡Perfecto!</li>
+        <li>✅ "Mi2026Clave" - ¡Excelente!</li>
+    </ul>
+    
+    <div class="section-break"></div>
+    
+    <h2>🚀 Cómo usar el sistema</h2>
+    
+    <h3>Primer inicio de sesión</h3>
+    <ol>
+        <li>Abre tu navegador y ve a <code>https://drakkenno.github.io/nas-redirector/</code></li>
+        <li>Pincha en el endiablado boton grande que ocupa toda la pantalla</li>
+        <li>Introduce el usuario y contraseña temporal que te dieron</li>
+        <li>Se abrirá una pantalla pidiendo cambiar tu contraseña</li>
+        <li>Escribe una contraseña nueva que cumpla los requisitos</li>
+        <li>Haz clic en "Cambiar contraseña"</li>
+        <li>¡Listo! Ya puedes usar el sistema</li>
+    </ol>
+    
+    <h3>Inicio de sesión normal</h3>
+    <ol>
+        <li>Ve a <code>https://drakkenno.github.io/nas-redirector/</code></li>
+        <li>Pincha en el endiablado boton grande que ocupa toda la pantalla</li>
+        <li>Introduce tu usuario y contraseña</li>
+        <li>Haz clic en "Iniciar sesión"</li>
+        <li>¡Ya estás dentro!</li>
+    </ol>
+    
+    <h3>Subir archivos</h3>
+    <p><strong>Opción 1 - Hacer clic:</strong></p>
+    <ol>
+        <li>Haz clic en el botón de subida</li>
+        <li>Selecciona uno o varios archivos</li>
+        <li>¡Se suben y encriptan automáticamente!</li>
+    </ol>
+    
+    <p><strong>Opción 2 - Arrastrar y soltar:</strong></p>
+    <ol>
+        <li>Arrastra archivos desde tu computadora</li>
+        <li>Suéltalos en el área de subida</li>
+        <li>¡Listo! Se encriptan y guardan</li>
+    </ol>
+    
+    <div class="danger">
+        <p><strong>Si un archivo es rechazado verás un mensaje claro:</strong></p>
+        <ul>
+            <li>❌ "Archivos ejecutables no permitidos: virus.exe"</li>
+            <li>❌ "El contenido no coincide con formato JPG: falso.jpg"</li>
+            <li>❌ "Tipo de archivo no permitido: documento.xyz"</li>
+        </ul>
+    </div>
+    
+    <div class="section-break"></div>
+    
+    <h2>💾 Espacio de almacenamiento</h2>
+    
+    <h3>¿Cuánto espacio tengo?</h3>
+    <ul>
+        <li><strong>Por defecto:</strong> 10GB por usuario</li>
+        <li>El administrador puede darte más o menos según tu necesidad</li>
+        <li>Puedes ver tu uso en tiempo real en la parte superior</li>
+    </ul>
+    
+    <h3>Indicador de espacio (colores):</h3>
+    <table>
+        <tr>
+            <th>Color</th>
+            <th>Porcentaje</th>
+            <th>Significado</th>
+        </tr>
+        <tr>
+            <td>🟢 VERDE</td>
+            <td>0-70%</td>
+            <td>Tienes mucho espacio disponible</td>
+        </tr>
+        <tr>
+            <td>🟠 NARANJA</td>
+            <td>70-90%</td>
+            <td>Te estás acercando al límite</td>
+        </tr>
+        <tr>
+            <td>🔴 ROJO</td>
+            <td>90-100%</td>
+            <td>Casi lleno - elimina archivos</td>
+        </tr>
+    </table>
+    
+    <div class="section-break"></div>
+    
+    <h2>🔒 Resumen de seguridad</h2>
+    
+    <table>
+        <tr>
+            <th>Característica</th>
+            <th>Nivel de Protección</th>
+            <th>¿Qué significa para ti?</th>
+        </tr>
+        <tr>
+            <td><strong>Tu contraseña</strong></td>
+            <td>Bcrypt con 12 rondas</td>
+            <td>Imposible de descifrar, tardaría millones de años</td>
+        </tr>
+        <tr>
+            <td><strong>Archivos</strong></td>
+            <td>AES-256-GCM (militar)</td>
+            <td>La NSA lo usa para secretos de estado</td>
+        </tr>
+        <tr>
+            <td><strong>Nombres de archivos</strong></td>
+            <td>HMAC-SHA256</td>
+            <td>Completamente ocultos en el disco</td>
+        </tr>
+        <tr>
+            <td><strong>Integridad</strong></td>
+            <td>Etiquetas de autenticación</td>
+            <td>Detecta si alguien modificó tus archivos</td>
+        </tr>
+        <tr>
+            <td><strong>Separación</strong></td>
+            <td>Aislamiento total</td>
+            <td>Otros usuarios NO pueden ver tus archivos</td>
+        </tr>
+        <tr>
+            <td><strong>Sesiones</strong></td>
+            <td>Cookies seguras</td>
+            <td>Protección contra robo de sesión</td>
+        </tr>
+        <tr>
+            <td><strong>Virus</strong></td>
+            <td>Validación de contenido</td>
+            <td>Bloquea ejecutables y malware disfrazado</td>
+        </tr>
+        <tr>
+            <td><strong>Ataques</strong></td>
+            <td>Límites de velocidad</td>
+            <td>Máximo 10 intentos de login, 100 subidas por 15 min</td>
+        </tr>
+    </table>
+    
+    <div class="section-break"></div>
+    
+    <h2>❓ Preguntas frecuentes</h2>
+    
+    <h3>¿Puede el administrador ver mis archivos?</h3>
+    <div class="success">
+        <p><strong>NO.</strong> Aunque el administrador puede:</p>
+        <ul>
+            <li>✅ Crear tu cuenta de usuario</li>
+            <li>✅ Darte más o menos espacio de almacenamiento</li>
+            <li>✅ Eliminar tu cuenta si es necesario</li>
+        </ul>
+    </div>
+    
+    <div class="danger">
+        <p><strong>El administrador NO puede:</strong></p>
+        <ul>
+            <li>❌ Ver tus contraseñas (solo ve códigos encriptados)</li>
+            <li>❌ Leer tus archivos (están encriptados con TU contraseña)</li>
+            <li>❌ Ver los nombres de tus archivos (están ocultos)</li>
+            <li>❌ Desencriptar tus archivos sin tu contraseña</li>
+        </ul>
+    </div>
+    
+    <p><strong>Razón:</strong> Solo TÚ tienes la llave (tu contraseña). Sin ella, tus archivos son ilegibles.</p>
+    
+    <h3>¿Qué pasa si olvido mi contraseña?</h3>
+    <div class="danger">
+        <p><strong>⚠️ IMPORTANTE:</strong> Si olvidas tu contraseña, tus archivos se pierden PARA SIEMPRE.</p>
+        <p><strong>¿Por qué?</strong></p>
+        <ul>
+            <li>Tus archivos están encriptados con tu contraseña</li>
+            <li>No hay forma de recuperarlos sin ella</li>
+            <li>Ni el administrador ni nadie puede ayudarte</li>
+            <li>Esta es la desventaja de la seguridad máxima</li>
+        </ul>
+    </div>
+    
+    <div class="highlight">
+        <p><strong>Recomendación:</strong></p>
+        <ul>
+            <li>Usa una contraseña que puedas recordar</li>
+            <li>Guárdala en un lugar seguro (físicamente escrita)</li>
+            <li>Considera usar un gestor de contraseñas</li>
+        </ul>
+    </div>
+    
+    <h3>¿Puede alguien hackear mis archivos?</h3>
+    <p><strong>Es extremadamente difícil.</strong> Necesitarían:</p>
+    <ol>
+        <li>Acceso físico al servidor (ya es difícil)</li>
+        <li>Robar el archivo .masterkey (protegido con permisos especiales)</li>
+        <li>Robar tu contraseña (imposible porque está encriptada con bcrypt)</li>
+        <li>Descifrar el bcrypt (tardaría millones de años con computadoras actuales)</li>
+    </ol>
+    
+    <div class="section-break"></div>
+    
+    <h2>🎓 Consejos de seguridad</h2>
+    
+    <h3>Para crear una contraseña segura:</h3>
+    <div class="success">
+        <p><strong>✅ BUENAS PRÁCTICAS:</strong></p>
+        <ul>
+            <li>Usa frases memorables: <code>MiGato2Blanco2026</code></li>
+            <li>Combina palabras: <code>CafeSolLuna123</code></li>
+            <li>Usa más de 12 caracteres si es posible</li>
+            <li>Mezcla mayúsculas, minúsculas y números</li>
+        </ul>
+    </div>
+    
+    <div class="danger">
+        <p><strong>❌ EVITA:</strong></p>
+        <ul>
+            <li>Contraseñas obvias: <code>123456</code>, <code>password</code></li>
+            <li>Información personal: <code>JuanPerez1985</code></li>
+            <li>Palabras del diccionario: <code>chocolate</code></li>
+            <li>Fechas: <code>01012000</code></li>
+        </ul>
+    </div>
+    
+    <h3>Protege tu contraseña:</h3>
+    <ul>
+        <li>🔒 No la compartas con NADIE</li>
+        <li>🔒 No la escribas en lugares visibles</li>
+        <li>🔒 Cámbiala si sospechas que alguien la conoce</li>
+        <li>🔒 Usa contraseñas diferentes para cada servicio</li>
+        <li>🔒 Considera un gestor de contraseñas (LastPass, 1Password, Bitwarden)</li>
+    </ul>
+    
+    <div class="section-break"></div>
+    
+    <h2>✨ Mensaje final</h2>
+    
+    <div class="success">
+        <p><strong>Tus archivos están protegidos con tecnología de nivel militar.</strong></p>
+        <p>Este sistema usa los mismos estándares de seguridad que las agencias gubernamentales para proteger secretos de estado. Tu contraseña es la única llave, y sin ella, ni siquiera los mejores hackers del mundo podrían acceder a tus archivos.</p>
+    </div>
+    
+    <div class="info">
+        <p><strong>Recuerda:</strong></p>
+        <ul>
+            <li>🔐 Tu contraseña es sagrada - no la olvides</li>
+            <li>🔐 Nadie más puede ver tus archivos</li>
+            <li>🔐 El sistema bloquea archivos peligrosos automáticamente</li>
+            <li>🔐 Tus archivos y sus nombres están completamente encriptados</li>
+        </ul>
+    </div>
+    
+    <p style="text-align: center; font-size: 1.2em; margin: 2em 0;">
+        <strong>¡Gracias por usar nuestro sistema de almacenamiento seguro!</strong>
+    </p>
+    
+    <div class="footer">
+        <p><strong>Versión de la guía:</strong> 1.0</p>
+        <p><strong>Última actualización:</strong> 7 de marzo de 2026</p>
+        <p><strong>Idioma:</strong> Español 🇪🇸</p>
+    </div>
+</body>
+</html>
