@@ -123,12 +123,15 @@
   </div>
 
   <script>
-    // This will be updated by the updater script with ngrok tunnel URL
-    const NAS_URL = "https://uocig-79-117-251-118.a.free.pinggy.link";
+    // This will be updated by the updater script with tunnel URL
+    const NAS_URL = "https://hdcxf-79-117-251-118.a.free.pinggy.link";
     
     function openNAS() {
       if (NAS_URL && NAS_URL !== "#" && !NAS_URL.includes("loading")) {
-        window.location.href = NAS_URL;
+        // Use bypass-pinggy.html to avoid Pinggy security page
+        // Pass tunnel URL as query parameter
+        const encodedUrl = encodeURIComponent(NAS_URL);
+        window.location.href = `./bypass-pinggy.html?url=${encodedUrl}`;
       } else {
         alert("Tunnel URL not yet available. Please wait and refresh.");
       }
