@@ -113,9 +113,9 @@
             Preparing secure NAS access...
         </p>
         <div class="info">
-            ✅ Opening your configured tunnel URL<br>
-            ✅ Automatic fallback if browser blocks pre-checks<br>
-            ✅ No manual copy/paste needed
+            ✅ Sending <code>X-Pinggy-No-Screen</code> automatically<br>
+            ✅ Loading NAS page directly without the warning screen<br>
+            ✅ Fallback guidance if browser blocks cross-origin fetch
         </div>
         <p class="small" id="details">Checking tunnel availability...</p>
         <div class="error" id="error-msg"></div>
@@ -134,40 +134,56 @@
 
         console.log("Opening tunnel:", tunnelUrl);
 
-        function navigateToTunnel() {
-            statusText.innerHTML = '<div class="spinner"></div><br>Opening NAS tunnel...';
-            details.textContent = 'Redirecting now.';
-            window.location.href = tunnelUrl;
+        function showFailure(message) {
+            statusText.innerHTML = 'Unable to load NAS automatically';
+            details.textContent = 'Automatic bypass could not complete.';
+            errorBox.style.display = 'block';
+            errorBox.innerHTML = message;
+            retryBtn.style.display = 'inline-block';
         }
 
-        // Browser CORS policies commonly block custom X-Pinggy-No-Screen headers from JS fetch.
-        // We do a lightweight availability check without custom headers, then navigate directly.
-        fetch(tunnelUrl, {
-            method: 'HEAD',
-            mode: 'cors',
-            credentials: 'include'
-        })
-            .then(() => {
-                details.textContent = 'Tunnel reachable. Opening NAS...';
-                setTimeout(navigateToTunnel, 300);
-            })
-            .catch((error) => {
-                console.warn('Pre-check blocked or failed, continuing with direct navigation:', error);
-                details.textContent = 'Pre-check blocked by browser policy. Opening directly...';
-                setTimeout(navigateToTunnel, 500);
-            });
+        async function loadNasWithBypassHeader() {
+            statusText.innerHTML = '<div class="spinner"></div><br>Fetching NAS with bypass header...';
+            details.textContent = 'Requesting tunnel content with X-Pinggy-No-Screen.';
 
-        // If navigation is blocked by popup/navigation settings, show manual action.
-        setTimeout(() => {
-            if (document.visibilityState === 'visible') {
-                errorBox.style.display = 'block';
-                errorBox.innerHTML = `
-                    <strong>If NAS did not open automatically:</strong><br>
-                    Click retry to try again.
-                `;
-                retryBtn.style.display = 'inline-block';
+            try {
+                const response = await fetch(tunnelUrl, {
+                    method: 'GET',
+                    mode: 'cors',
+                    credentials: 'include',
+                    headers: {
+                        'X-Pinggy-No-Screen': 'true'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+
+                const html = await response.text();
+
+                if (/served through pinggy\.io/i.test(html) && /Enter site/i.test(html)) {
+                    throw new Error('Pinggy warning page still returned by upstream');
+                }
+
+                details.textContent = 'Rendering NAS page...';
+
+                // Render returned HTML as full document.
+                document.open();
+                document.write(html);
+                document.close();
+            } catch (error) {
+                console.error('Bypass fetch failed:', error);
+                showFailure(`
+                    <strong>Bypass request failed:</strong> ${String(error.message || error)}<br><br>
+                    If this is a browser CORS restriction, use a request-header extension and add:<br>
+                    <code>X-Pinggy-No-Screen: true</code><br><br>
+                    Or use a non-Pinggy tunnel provider (Cloudflare/Ngrok/Tailscale) from the startup script.
+                `);
             }
-        }, 3500);
+        }
+
+        loadNasWithBypassHeader();
     </script>
 </body>
 </html>
