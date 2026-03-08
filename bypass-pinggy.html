@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NAS Server Access</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            text-align: center;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+        }
+        
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 2rem;
+        }
+        
+        .status {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+        
+        .spinner {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .info {
+            background: #f0f4ff;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin-top: 20px;
+            text-align: left;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            color: #333;
+        }
+        
+        .error {
+            color: #d32f2f;
+            background: #ffebee;
+            border-left: 4px solid #d32f2f;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 4px;
+            display: none;
+        }
+        
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 15px;
+            transition: background 0.3s;
+        }
+        
+        button:hover {
+            background: #764ba2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔐 NAS Server</h1>
+        <p class="status">
+            <div class="spinner"></div>
+            <br>
+            Bypassing Pinggy security page...
+        </p>
+        <div class="info">
+            ✅ Using X-Pinggy-No-Screen header<br>
+            ✅ No security page will appear<br>
+            ✅ Secure direct access
+        </div>
+        <div class="error" id="error-msg"></div>
+        <button id="retry-btn" style="display: none;" onclick="location.reload()">Retry</button>
+    </div>
+
+    <script>
+        // Get the tunnel URL from the query parameter or use the configured URL
+        const configUrl = "https://ncboy-79-117-251-118.a.free.pinggy.link";
+        const tunnelUrl = new URLSearchParams(window.location.search).get('url') || configUrl;
+        
+        console.log("Loading:", tunnelUrl);
+        
+        // Fetch with X-Pinggy-No-Screen header to bypass security page
+        fetch(tunnelUrl, {
+            method: 'GET',
+            headers: {
+                'X-Pinggy-No-Screen': 'true'
+            },
+            credentials: 'include'
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            }
+            return response.text();
+        })
+        .then(html => {
+            // Replace current page with fetched content
+            document.open();
+            document.write(html);
+            document.close();
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            document.querySelector('.status').style.display = 'none';
+            document.querySelector('.spinner').style.display = 'none';
+            document.getElementById('error-msg').style.display = 'block';
+            document.getElementById('error-msg').innerHTML = `
+                <strong>Error loading NAS:</strong><br>
+                ${error.message}<br><br>
+                <strong>Trying direct link instead...</strong>
+            `;
+            document.getElementById('retry-btn').style.display = 'inline-block';
+            
+            // Try direct navigation as fallback
+            setTimeout(() => {
+                window.location.href = tunnelUrl;
+            }, 2000);
+        });
+    </script>
+</body>
+</html>

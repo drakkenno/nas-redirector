@@ -3,3 +3,7 @@ start-tunnel-and-update.sh
 node_modules/
 .env
 .DS_Store
+*.sh
+*.service
+*.timer
+*.md
