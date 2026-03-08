@@ -95,69 +95,79 @@
         button:hover {
             background: #764ba2;
         }
+
+        .small {
+            margin-top: 12px;
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>🔐 NAS Server</h1>
-        <p class="status">
+        <p class="status" id="status-text">
             <div class="spinner"></div>
             <br>
-            Bypassing Pinggy security page...
+            Preparing secure NAS access...
         </p>
         <div class="info">
-            ✅ Using X-Pinggy-No-Screen header<br>
-            ✅ No security page will appear<br>
-            ✅ Secure direct access
+            ✅ Opening your configured tunnel URL<br>
+            ✅ Automatic fallback if browser blocks pre-checks<br>
+            ✅ No manual copy/paste needed
         </div>
+        <p class="small" id="details">Checking tunnel availability...</p>
         <div class="error" id="error-msg"></div>
         <button id="retry-btn" style="display: none;" onclick="location.reload()">Retry</button>
     </div>
 
     <script>
         // Get the tunnel URL from the query parameter or use the configured URL
-        const configUrl = "https://ncboy-79-117-251-118.a.free.pinggy.link";
+        const configUrl = "https://xdcaa-79-117-251-118.a.free.pinggy.link";
         const tunnelUrl = new URLSearchParams(window.location.search).get('url') || configUrl;
         
-        console.log("Loading:", tunnelUrl);
-        
-        // Fetch with X-Pinggy-No-Screen header to bypass security page
+        const statusText = document.getElementById('status-text');
+        const details = document.getElementById('details');
+        const errorBox = document.getElementById('error-msg');
+        const retryBtn = document.getElementById('retry-btn');
+
+        console.log("Opening tunnel:", tunnelUrl);
+
+        function navigateToTunnel() {
+            statusText.innerHTML = '<div class="spinner"></div><br>Opening NAS tunnel...';
+            details.textContent = 'Redirecting now.';
+            window.location.href = tunnelUrl;
+        }
+
+        // Browser CORS policies commonly block custom X-Pinggy-No-Screen headers from JS fetch.
+        // We do a lightweight availability check without custom headers, then navigate directly.
         fetch(tunnelUrl, {
-            method: 'GET',
-            headers: {
-                'X-Pinggy-No-Screen': 'true'
-            },
+            method: 'HEAD',
+            mode: 'cors',
             credentials: 'include'
         })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            .then(() => {
+                details.textContent = 'Tunnel reachable. Opening NAS...';
+                setTimeout(navigateToTunnel, 300);
+            })
+            .catch((error) => {
+                console.warn('Pre-check blocked or failed, continuing with direct navigation:', error);
+                details.textContent = 'Pre-check blocked by browser policy. Opening directly...';
+                setTimeout(navigateToTunnel, 500);
+            });
+
+        // If navigation is blocked by popup/navigation settings, show manual action.
+        setTimeout(() => {
+            if (document.visibilityState === 'visible') {
+                errorBox.style.display = 'block';
+                errorBox.innerHTML = `
+                    <strong>If NAS did not open automatically:</strong><br>
+                    Click retry to try again.
+                `;
+                retryBtn.style.display = 'inline-block';
             }
-            return response.text();
-        })
-        .then(html => {
-            // Replace current page with fetched content
-            document.open();
-            document.write(html);
-            document.close();
-        })
-        .catch(error => {
-            console.error("Error:", error);
-            document.querySelector('.status').style.display = 'none';
-            document.querySelector('.spinner').style.display = 'none';
-            document.getElementById('error-msg').style.display = 'block';
-            document.getElementById('error-msg').innerHTML = `
-                <strong>Error loading NAS:</strong><br>
-                ${error.message}<br><br>
-                <strong>Trying direct link instead...</strong>
-            `;
-            document.getElementById('retry-btn').style.display = 'inline-block';
-            
-            // Try direct navigation as fallback
-            setTimeout(() => {
-                window.location.href = tunnelUrl;
-            }, 2000);
-        });
+        }, 3500);
     </script>
 </body>
 </html>
