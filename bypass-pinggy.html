@@ -108,18 +108,21 @@
     <div class="container">
         <h1>🔐 NAS Server</h1>
         <p class="status" id="status-text">
-            <div class="spinner"></div>
-            <br>
-            Preparing secure NAS access...
+            Opening NAS Tunnel...
         </p>
-        <div class="info">
-            ✅ Sending <code>X-Pinggy-No-Screen</code> automatically<br>
-            ✅ Loading NAS page directly without the warning screen<br>
-            ✅ Fallback guidance if browser blocks cross-origin fetch
+        <div class="info" id="info-box">
+            ℹ️ <strong>Pinggy Free Tunnel Security Notice</strong><br><br>
+            Your NAS is currently served via Pinggy's free tunnel.<br>
+            Pinggy shows a one-time security confirmation page on first visit.<br><br>
+            <strong>What happens next:</strong><br>
+            • You'll see Pinggy's security page<br>
+            • Click "Enter site" once<br>
+            • A cookie is saved - you won't see this page again<br><br>
+            <strong>To avoid this entirely:</strong> Use a different tunnel (Cloudflare/Ngrok/Tailscale)
         </div>
-        <p class="small" id="details">Checking tunnel availability...</p>
+        <p class="small" id="details">Redirecting in <span id="countdown">3</span> seconds...</p>
         <div class="error" id="error-msg"></div>
-        <button id="retry-btn" style="display: none;" onclick="location.reload()">Retry</button>
+        <button id="open-btn" onclick="openNow()">Open NAS Now</button>
     </div>
 
     <script>
@@ -127,63 +130,29 @@
         const configUrl = "https://xdcaa-79-117-251-118.a.free.pinggy.link";
         const tunnelUrl = new URLSearchParams(window.location.search).get('url') || configUrl;
         
-        const statusText = document.getElementById('status-text');
         const details = document.getElementById('details');
-        const errorBox = document.getElementById('error-msg');
-        const retryBtn = document.getElementById('retry-btn');
+        const countdownEl = document.getElementById('countdown');
 
         console.log("Opening tunnel:", tunnelUrl);
 
-        function showFailure(message) {
-            statusText.innerHTML = 'Unable to load NAS automatically';
-            details.textContent = 'Automatic bypass could not complete.';
-            errorBox.style.display = 'block';
-            errorBox.innerHTML = message;
-            retryBtn.style.display = 'inline-block';
+        function openNow() {
+            details.textContent = 'Opening NAS...';
+            window.location.href = tunnelUrl;
         }
 
-        async function loadNasWithBypassHeader() {
-            statusText.innerHTML = '<div class="spinner"></div><br>Fetching NAS with bypass header...';
-            details.textContent = 'Requesting tunnel content with X-Pinggy-No-Screen.';
-
-            try {
-                const response = await fetch(tunnelUrl, {
-                    method: 'GET',
-                    mode: 'cors',
-                    credentials: 'include',
-                    headers: {
-                        'X-Pinggy-No-Screen': 'true'
-                    }
-                });
-
-                if (!response.ok) {
-                    throw new Error(`HTTP ${response.status}`);
-                }
-
-                const html = await response.text();
-
-                if (/served through pinggy\.io/i.test(html) && /Enter site/i.test(html)) {
-                    throw new Error('Pinggy warning page still returned by upstream');
-                }
-
-                details.textContent = 'Rendering NAS page...';
-
-                // Render returned HTML as full document.
-                document.open();
-                document.write(html);
-                document.close();
-            } catch (error) {
-                console.error('Bypass fetch failed:', error);
-                showFailure(`
-                    <strong>Bypass request failed:</strong> ${String(error.message || error)}<br><br>
-                    If this is a browser CORS restriction, use a request-header extension and add:<br>
-                    <code>X-Pinggy-No-Screen: true</code><br><br>
-                    Or use a non-Pinggy tunnel provider (Cloudflare/Ngrok/Tailscale) from the startup script.
-                `);
+        // Countdown and auto-redirect
+        let seconds = 3;
+        const interval = setInterval(() => {
+            seconds--;
+            if (countdownEl) {
+                countdownEl.textContent = seconds;
             }
-        }
-
-        loadNasWithBypassHeader();
+            
+            if (seconds <= 0) {
+                clearInterval(interval);
+                openNow();
+            }
+        }, 1000);
     </script>
 </body>
 </html>
