@@ -123,17 +123,15 @@
   </div>
 
   <script>
-    // This will be updated by the updater script with tunnel URL
-    const NAS_URL = "https://ivrnv-79-112-89-2.a.free.pinggy.link";
+    // Direct connection to NAS server via DuckDNS
+    const NAS_URL = "https://uuyum-2a0c-5a82-280c-ed00-f21-4c54-df48-ffd4.a.free.pinggy.link";
     
     function openNAS() {
-      if (NAS_URL && NAS_URL !== "#" && !NAS_URL.includes("loading")) {
-        // Use bypass-pinggy.html to avoid Pinggy security page
-        // Pass tunnel URL as query parameter
-        const encodedUrl = encodeURIComponent(NAS_URL);
-        window.location.href = `./bypass-pinggy.html?url=${encodedUrl}`;
+      if (NAS_URL && NAS_URL !== "#") {
+        // Direct redirect to NAS (no tunnel needed)
+        window.location.href = NAS_URL;
       } else {
-        alert("Tunnel URL not yet available. Please wait and refresh.");
+        alert("NAS URL not available. Please check your connection.");
       }
     }
 
